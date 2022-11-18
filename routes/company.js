@@ -90,7 +90,7 @@ router.get('/salaries', (request, response) => {
                 join "employees" ON "jobs"."job_id" = "employees"."job_id"
                     ORDER BY max_salary DESC LIMIT 1`, (error, results) => {
             if (error) {
-                throw error
+                response.status(500).send(error)
             }
             setHigh(results.rows)
         })
@@ -100,7 +100,7 @@ router.get('/salaries', (request, response) => {
                 join "employees" ON "jobs"."job_id" = "employees"."job_id"
                     ORDER BY max_salary  LIMIT 1`, (error, results) => {
             if (error) {
-                throw error
+                response.status(500).send(error)
             }
             setLow(results.rows)
             response.status(200).json(res)
@@ -129,24 +129,25 @@ router.get('/employees/role/:role', (request, response) => {
             join "jobs" ON "jobs"."job_id" = "employees"."job_id" 
             WHERE "jobs"."job_title" = $1`, [role], (error, results) => {
         if (error) {
-            throw error
+            response.status(404).send(error)
         }
         response.status(200).json(results.rows)
     })
 });
 
 //3
-router.get('/employees/pagination/:page', (request, response) => {
-    const page = parseInt(request.params.page)
+/*router.get('/employees/pagination', (request, response) => {
+    const page = request.query.page
+    const limit = request.query.limit
     db.query(`SELECT *
             FROM employees
-            LIMIT 10 OFFSET ($1 - 1) * 10`, [page],(error, results) => {
+            LIMIT ${limit} OFFSET (${page} - 1) * ${limit}`,(error, results) => {
         if (error) {
-            throw error
+            response.status(500).send(error)
         }
-        response.status(200).json(results.rows)
+        response.status(200).json(results)
     })
-});
+});*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

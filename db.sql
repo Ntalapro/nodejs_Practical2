@@ -68,11 +68,11 @@ CREATE TABLE IF NOT EXISTS dependents (
 );
 
 /*Data for the table regions */
-INSERT INTO regions(region_id,region_name) VALUES
-(1,'Europe'),
-(2,'Americas'),
-(3,'Asia'),
-(4,'Middle East and Africa');
+INSERT INTO regions(region_name) VALUES
+('Europe'),
+('Americas'),
+('Asia'),
+('Middle East and Africa');
 
 
 /*Data for the table countries */

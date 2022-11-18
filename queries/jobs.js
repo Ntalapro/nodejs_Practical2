@@ -3,9 +3,11 @@ const { db } = require("../models");
 const getJobs = (request, response) => {
     db.query('SELECT * FROM jobs ORDER BY job_id ASC', (error, results) => {
         if (error) {
-            throw error
+            response.status(500).send(error)
         }
-        response.status(200).json(results.rows)
+        else{
+            response.status(200).json(results.rows)
+        }
     })
 }
  
@@ -13,9 +15,11 @@ const getJobById = (request, response) => {
     const id = parseInt(request.params.id)
     db.query('SELECT * FROM jobs WHERE job_id = $1', [id], (error, results) => {
         if (error) {
-            throw error
+            response.status(404).send(error)
         }
-        response.status(200).json(results.rows)
+        else{
+            response.status(200).json(results.rows)
+        }
     })
 }
 
@@ -26,11 +30,13 @@ const createJob = (request, response) => {
         min_salary,
         max_salary
     } = request.body
-    db.query('INSERT INTO jobs (job_title,min_salary,max_salary) VALUES ($1,$2,$3,$4)', [job_id,job_title,min_salary,max_salary], (error, results) => {
+    db.query('INSERT INTO jobs (job_id,job_title,min_salary,max_salary) VALUES ($1,$2,$3,$4)', [job_id,job_title,min_salary,max_salary], (error, results) => {
         if (error) {
-            throw error
+            response.status(500).send(error)
         }
-        response.status(201).send(`Country added with ID: ${job_id}`)
+        else{
+        response.status(201).send(`Job added with ID: ${job_id}`)
+        }
     })
 }
 
@@ -48,9 +54,11 @@ const updateJob = (request, response) => {
             max_salary,id],
         (error, results) => {
             if (error) {
-                throw error
+                response.status(404).send(error)
             }
+            else{
             response.status(200).send(`Job modified with ID: ${id}`)
+            }
         }
     )
 }
@@ -59,9 +67,11 @@ const deleteJob = (request, response) => {
     const id = parseInt(request.params.id)
     db.query('DELETE FROM jobs WHERE job_id = $1', [id], (error, results) => {
         if (error) {
-            throw error
+            response.status(404).send(error)
         }
+        else{
         response.status(200).send(`Job deleted with ID: ${id}`)
+        }
     })
 }
 
