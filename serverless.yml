@@ -103,8 +103,8 @@ functions:
       - httpApi: 'PUT /company/regions/{id}'
       - httpApi: 'DELETE /company/regions/{id}'
     environment:
-        DB_USER : "postgres"
-        DB_HOST : "database-1.cjrlbyedtzo5.us-east-1.rds.amazonaws.com"
-        DB_NAME : "postgres"
-        DB_PASSWORLD : "5562#Tncosane#"
+        DB_USER : "******"
+        DB_HOST : "****************.us-east-1.rds.amazonaws.com"
+        DB_NAME : "*****"
+        DB_PASSWORLD : "******"
         DB_PORT : 5432
