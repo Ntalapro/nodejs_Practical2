@@ -76,7 +76,6 @@ const updateEmployee = (request, response) => {
             department_id,id],
         (error, results) => {
             if (error) {
-                throw error
                 response.status(500).send(error)
             }
             else{

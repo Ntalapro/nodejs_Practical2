@@ -7,7 +7,9 @@ const getDepartments = (request, response) => {
         if (error) {
             response.status(500).send(error)
         }
-        response.status(200).json(results.rows)
+        else{
+            response.status(200).json(results.rows)
+        }
     })
 }
  
@@ -18,7 +20,9 @@ const getDepartmentById = (request, response) => {
         if (error) {
             response.status(404).send(error)
         }
-        response.status(200).json(results.rows)
+        else{
+            response.status(200).json(results.rows)
+        }
     })
 }
 
@@ -47,7 +51,9 @@ const createDepartment = (request, response) => {
         if (error) {
             response.status(500).send(error)
         }
+        else{
         response.status(201).send(`Department added with ID: ${department_id}`)
+        }
     })
 }
 
@@ -65,7 +71,9 @@ const updateDepartment = (request, response) => {
             if (error) {
                 response.status(404).send(error)
             }
+            else{
             response.status(200).send(`Department modified with ID: ${id}`)
+            }
         }
     )
 }
@@ -76,7 +84,9 @@ const deleteDepartment = (request, response) => {
         if (error) {
             response.status(404).send(error)
         }
+        else{
         response.status(200).send(`Department deleted with ID: ${id}`)
+        }
     })
 }
 
